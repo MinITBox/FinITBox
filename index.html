@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Estimation of the total cost of the loan, of the annuity, of the Internal Rate of Return (IRR), of the Effective Annual Interest Rate (EAR), by taking into account the credit amount, the period in months, the monthly interest rate, the single commission (for examination/granting), and the monthly commission (for administration)."
+		/>
+		<meta
+			name="keywords"
+			content="credit, loan, împrumut, заем, annuity, anuitate, аннуитет, total cost of credit, costul total al creditului, полная стоимость кредита, credit cost assessment, etvaluarea costurilor de credit, оценка кредитных затрат, internal rate of return, IRR, rata internă de rentabilitate, внутренняя норма доходности, effective annual interest rate (EAR), rata anuală efectivă a dobânzii, DAE, эффективная годовая процентная ставка"
+		/>
+
+		<title>MinITBox</title>
+		<link
+			rel="apple-touch-icon"
+			sizes="120x120"
+			href="./img/favicon/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./img/favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="./img/favicon/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="./img/favicon/site.webmanifest" />
+		<link
+			rel="mask-icon"
+			href="./img/favicon/safari-pinned-tab.svg"
+			color="#645bd5"
+		/>
+		<link rel="shortcut icon" href="./img/favicon/favicon.ico" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta
+			name="msapplication-config"
+			content="./img/favicon/browserconfig.xml"
+		/>
+		<meta name="theme-color" content="#d8c988" />
+
+		<link rel="stylesheet" href="./css/main.css" />
+		<!-- <script type="module" src="./js/main1.js"></script> -->
+	</head>
+	<body>
+		<!-- Header start -->
+		<header class="header">
+			<div class="container">
+				<div class="header-wrapper">
+					<a href="./index.html" class="header-logo">
+						<img
+							class="header-logo-image"
+							src="./img/minitbox-logo/minitbox-logo-transparent.png"
+							alt="MinITBox Logo"
+						/>
+					</a>
+					<nav class="header-menu">
+						<ul class="header-menu__list">
+							<li class="header-menu__item">
+								<a href="./index.html" class="header-menu__link is-current"
+									>Credit cost assessment</a
+								>
+							</li>
+							<li class="header-menu__item">
+								<a href="./actual-credit-debt.html" class="header-menu__link"
+									>Actual credit debt</a
+								>
+							</li>
+						</ul>
+						<div class="header-menu__close">
+							<span class="header-menu__close-line"></span
+							><span class="header-menu__close-line"></span>
+						</div>
+					</nav>
+					<div class="header__burger burger">
+						<span class="burger__line burger__line-first"></span
+						><span class="burger__line burger__line-second"></span
+						><span class="burger__line burger__line-third"></span>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- Header end -->
+
+		<!-- Main start -->
+		<main class="main">
+			<div class="container">
+				<h1>Credit cost assessment</h1>
+				<div class="range-slider-container">
+					<div class="range-slider-wrapper">
+						<p>
+							Monthly interest rate (between 0.01% and 20.00%):<br />
+							<input
+								id="range-interestRate"
+								type="range"
+								min="0.01"
+								max="20"
+								step="0.01"
+								value="4.15"
+							/>
+							<span id="interestRate"></span>%
+						</p>
+					</div>
+					<div class="range-slider-wrapper">
+						<p>
+							Credit amount (in conventional units):<br />
+							<input
+								id="range-creditAmount"
+								type="range"
+								min="100"
+								max="500000"
+								step="100"
+								value="10000"
+							/>
+							<span id="creditAmount"></span> c.u.
+						</p>
+					</div>
+					<div class="range-slider-wrapper">
+						<p>
+							Credit period (months):<br />
+							<input
+								id="range-months"
+								type="range"
+								min="1"
+								max="60"
+								step="1"
+								value="12"
+							/>
+							<span id="months"></span> months
+						</p>
+					</div>
+				</div>
+				<div class="input-number-container">
+					<div class="input-number-wrapper">
+						<p class="input-number-title">Monthly commission:</p>
+						<input
+							id="input-monthly-commission"
+							type="number"
+							min="0.00"
+							step="0.01"
+							value="0.00"
+							inputmode="decimal"
+						/>
+						<span class="cu">c.u.</span>
+					</div>
+					<div class="input-number-wrapper">
+						<p class="input-number-title">Single commission:</p>
+						<input
+							id="input-single-commission"
+							type="number"
+							min="0.00"
+							step="0.01"
+							value="0.00"
+							inputmode="decimal"
+						/>
+						<span class="cu">c.u.</span>
+					</div>
+				</div>
+				<div class="credit-analysis">
+					<p>Annuity: <span id="annuity"></span> c.u.</p>
+					<p>Internal Rate of Return (IRR): <span id="irr"></span>%</p>
+					<p>Effective Annual Interest Rate (EAR): <span id="ear"></span>%</p>
+					<p>Total Credit Cost: <span id="total-credit-cost"></span>%</p>
+				</div>
+				<div class="table-wrapper">
+					<h3 class="table-title">Payment schedule:</h3>
+					<table style="border: 1px">
+						<thead>
+							<tr>
+								<th scope="col">Nr of<br />months</th>
+								<th scope="col">Credit<br />balance</th>
+								<th scope="col">Credit<br />payment</th>
+								<th scope="col">Interest<br />payment</th>
+								<th scope="col">Annuity</th>
+								<th scope="col">Monthly<br />commission</th>
+								<th scope="col">Single<br />commission</th>
+								<th scope="col">Full<br />payment</th>
+							</tr>
+						</thead>
+						<tfoot class="show-footer-above">
+							<tr>
+								<th class="total-row" colspan="2">Total</th>
+								<th class="total-credit-payment">0</th>
+								<th class="total-interest-payment">0</th>
+								<th class="total-annuity">0</th>
+								<th class="total-monthly-commission">0</th>
+								<th class="total-single-commission">0</th>
+								<th class="total-full-payment">0</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
+								<td class="nr-month">1</td>
+								<td class="credit-balance">50000</td>
+								<td class="credit-payment"></td>
+								<td class="interest-payment">600.00</td>
+								<td class="annuity">1916.94</td>
+								<td class="monthly-commission">0</td>
+								<td class="single-commission">0</td>
+								<td class="full-payment">800</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+		<!-- Main end -->
+		<!-- Footer start -->
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-wrapper">
+					<div class="footer-development">
+						<p>© MinITBox, 2024</p>
+						<p>
+							Developer (using open internet resources):
+							<a href="mailto:alex.minghi@gmail.com">Alex Minghi</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- Footer end -->
+		<script type="text/javascript" src="./js/header-scroll.js"></script>
+		<script type="text/javascript" src="./js/burger-handler.js"></script>
+		<script type="text/javascript" src="./js/credit-cost.js"></script>
+	</body>
+</html>

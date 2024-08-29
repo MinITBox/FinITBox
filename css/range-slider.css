@@ -1,0 +1,71 @@
+input[type='range'] {
+	--c: #daa520; /* active color */
+	--g: 1px; /* the gap */
+	--l: 5px; /* line thickness*/
+	--s: 20px; /* thumb size*/
+	--_c: color-mix(in srgb, var(--c), #000 var(--p, 0%));
+
+	width: 100%;
+	max-width: 500px;
+	height: var(--s); /* needed for Firefox*/
+
+	position: relative; /**vertical centering*/
+	top: 4px; /**positioning lower by 4px*/
+
+	-webkit-appearance: none;
+	-moz-appearance: none;
+
+	appearance: none;
+	background: none;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+/* Chrome, Edge, Safari, Opera */
+input[type='range']::-webkit-slider-thumb {
+	height: var(--s);
+	aspect-ratio: 1;
+	border-radius: 50%;
+	box-shadow: 0 0 0 var(--_b, var(--l)) inset var(--_c);
+	appearance: none;
+
+	border-image-source: linear-gradient(90deg, var(--_c) 50%, #ababab 0);
+	border-image-slice: 0 1;
+	border-image-width: calc(50% - var(--l) / 2) 100vw;
+	border-image-outset: 0 calc(100vw + var(--g));
+
+	transition-property: box-shadow, border-image-source;
+	transition-duration: 0.3s;
+}
+
+/* Firefox */
+input[type='range']::-moz-range-thumb {
+	height: var(--s);
+	aspect-ratio: 1;
+	border-radius: 50%;
+	box-shadow: 0 0 0 var(--_b, var(--l)) inset var(--_c);
+	appearance: none;
+
+	border-image-source: linear-gradient(90deg, var(--_c) 50%, #ababab 0);
+	border-image-slice: 0 1;
+	border-image-width: calc(50% - var(--l) / 2) 100vw;
+	border-image-outset: 0 calc(100vw + var(--g));
+
+	transition-property: box-shadow, border-image-source;
+	transition-duration: 0.3s;
+}
+
+input[type='range']:hover,
+input[type='range']:focus-visible {
+	--p: 25%;
+}
+input[type='range']:active,
+input[type='range']:focus-visible {
+	--_b: var(--s);
+}
+
+@supports not (color: color-mix(in srgb, red, red)) {
+	input {
+		--_c: var(--c);
+	}
+}

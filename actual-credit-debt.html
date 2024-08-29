@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Estimation of the total cost of the loan, of the annuity, of the Internal Rate of Return (IRR), of the Effective Annual Interest Rate (EAR), by taking into account the credit amount, the period in months, the monthly interest rate, the single commission (for examination/granting), and the monthly commission (for administration)."
+		/>
+		<meta
+			name="keywords"
+			content="credit, loan, împrumut, заем, annuity, anuitate, аннуитет, total cost of credit, costul total al creditului, полная стоимость кредита, credit cost assessment, etvaluarea costurilor de credit, оценка кредитных затрат, internal rate of return, IRR, rata internă de rentabilitate, внутренняя норма доходности, effective annual interest rate (EAR), rata anuală efectivă a dobânzii, DAE, эффективная годовая процентная ставка"
+		/>
+
+		<title>MinITBox</title>
+		<link
+			rel="apple-touch-icon"
+			sizes="120x120"
+			href="./img/favicon/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./img/favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="./img/favicon/favicon-16x16.png"
+		/>
+		<link rel="manifest" href="./img/favicon/site.webmanifest" />
+		<link
+			rel="mask-icon"
+			href="./img/favicon/safari-pinned-tab.svg"
+			color="#645bd5"
+		/>
+		<link rel="shortcut icon" href="./img/favicon/favicon.ico" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta
+			name="msapplication-config"
+			content="./img/favicon/browserconfig.xml"
+		/>
+		<meta name="theme-color" content="#d8c988" />
+
+		<link
+			rel="stylesheet"
+			href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+		/>
+		<link rel="stylesheet" href="./css/main.css" />
+	</head>
+	<body>
+		<!-- Header start -->
+		<header class="header">
+			<div class="container">
+				<div class="header-wrapper">
+					<a href="./index.html" class="header-logo">
+						<img
+							class="header-logo-image"
+							src="./img/minitbox-logo/minitbox-logo-transparent.png"
+							alt="MinITBox Logo"
+						/>
+					</a>
+					<nav class="header-menu">
+						<ul class="header-menu__list">
+							<li class="header-menu__item">
+								<a href="./index.html" class="header-menu__link"
+									>Credit cost assessment</a
+								>
+							</li>
+							<li class="header-menu__item">
+								<a
+									href="./actual-credit-debt.html"
+									class="header-menu__link is-current"
+									>Actual credit debt</a
+								>
+							</li>
+						</ul>
+						<div class="header-menu__close">
+							<span class="header-menu__close-line"></span
+							><span class="header-menu__close-line"></span>
+						</div>
+					</nav>
+					<div class="header__burger burger">
+						<span class="burger__line burger__line-first"></span
+						><span class="burger__line burger__line-second"></span
+						><span class="burger__line burger__line-third"></span>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- Header end -->
+
+		<!-- Main start -->
+		<main class="main">
+			<div class="container">
+				<h1>Actual credit debt</h1>
+				<div class="range-slider-container">
+					<div class="range-slider-wrapper">
+						<p>
+							Monthly interest rate (between 0.01% and 20.00%):<br />
+							<input
+								id="range-interestRate"
+								type="range"
+								min="0.01"
+								max="20"
+								step="0.01"
+								value="4.15"
+							/>
+							<span id="interestRate"></span>%
+						</p>
+					</div>
+					<div class="range-slider-wrapper">
+						<p>
+							Daily penalty rate (between 0.01% and 1.00%):<br />
+							<input
+								id="range-dailyPenaltyRate"
+								type="range"
+								min="0.00"
+								max="1.00"
+								step="0.01"
+								value="0.04"
+							/>
+							<span id="dailyPenaltyRate"></span>%
+						</p>
+					</div>
+					<div class="range-slider-wrapper">
+						<p>
+							Credit period (months):<br />
+							<input
+								id="range-months"
+								type="range"
+								min="1"
+								max="60"
+								step="1"
+								value="12"
+							/>
+							<span id="months"></span> months
+						</p>
+					</div>
+				</div>
+				<div class="input-number-container">
+					<div class="input-number-wrapper">
+						<p class="input-number-title">
+							Credit amount (in conventional units):
+						</p>
+						<input
+							id="input-creditAmount"
+							type="number"
+							min="0.00"
+							step="0.01"
+							value="10000.00"
+							inputmode="decimal"
+						/>
+						<span class="cu">c.u.</span>
+					</div>
+					<div class="input-number-wrapper">
+						<p class="input-number-title">Monthly commission:</p>
+						<input
+							id="input-monthly-commission"
+							type="number"
+							min="0.00"
+							step="0.01"
+							value="0.00"
+							inputmode="decimal"
+						/>
+						<span class="cu">c.u.</span>
+					</div>
+					<div class="input-number-wrapper">
+						<p class="input-number-title">Single commission:</p>
+						<input
+							id="input-single-commission"
+							type="number"
+							min="0.00"
+							step="0.01"
+							value="0.00"
+							inputmode="decimal"
+						/>
+						<span class="cu">c.u.</span>
+					</div>
+				</div>
+				<div class="input-date-container">
+					<div class="input-date-wrapper">
+						<p class="input-date-title">Date of credit issue:</p>
+						<input
+							id="input-date-credit-issue"
+							type="text"
+							required
+							pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"
+							placeholder="dd.mm.yyyy"
+						/>
+						<span class="validity"></span>
+					</div>
+				</div>
+
+				<div class="credit-analysis">
+					<p class="date-repayment">
+						Date of credit repayment: <span id="output-date-repayment"></span>
+					</p>
+
+					<p>Annuity: <span id="annuity"></span> c.u.</p>
+					<p>Internal Rate of Return (IRR): <span id="irr"></span>%</p>
+					<p>Effective Annual Interest Rate (EAR): <span id="ear"></span>%</p>
+					<p>Total Credit Cost: <span id="total-credit-cost"></span>%</p>
+				</div>
+				<div class="table-wrapper">
+					<h3 class="table-title">Payment schedule:</h3>
+					<table class="schedule-table" style="border: 1px">
+						<thead class="schedule-thead">
+							<tr>
+								<th scope="col">Nr of<br />months</th>
+								<th scope="col">Days</th>
+								<th scope="col">Date of<br />payment</th>
+								<th scope="col">Credit<br />balance</th>
+								<th scope="col">Credit<br />payment</th>
+								<th scope="col">Interest<br />payment</th>
+								<th scope="col">Annuity</th>
+								<th scope="col">Monthly<br />commission</th>
+								<th scope="col">Single<br />commission</th>
+								<th scope="col">Full<br />payment</th>
+							</tr>
+						</thead>
+						<tfoot class="schedule-tfoot show-footer-above">
+							<tr>
+								<th class="schedule-total-row" colspan="4">Total</th>
+								<th class="schedule-total-credit-payment">0</th>
+								<th class="schedule-total-interest-payment">0</th>
+								<th class="schedule-total-annuity">0</th>
+								<th class="schedule-total-monthly-commission">0</th>
+								<th class="schedule-total-single-commission">0</th>
+								<th class="schedule-total-full-payment">0</th>
+							</tr>
+						</tfoot>
+						<tbody class="schedule-tbody">
+							<tr>
+								<td class="schedule-nr-month">0</td>
+								<td class="schedule-days">0</td>
+								<td class="schedule-date-payment">01.07.2024</td>
+								<td class="schedule-credit-balance">50000</td>
+								<td class="schedule-credit-payment"></td>
+								<td class="schedule-interest-payment">600.00</td>
+								<td class="schedule-annuity">1916.94</td>
+								<td class="schedule-monthly-commission">0</td>
+								<td class="schedule-single-commission">0</td>
+								<td class="schedule-full-payment">800</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="input-date-container">
+					<div class="input-date-wrapper">
+						<p class="input-date-title">Date of actual debt calculation:</p>
+						<input
+							id="input-date-actual-debt"
+							type="text"
+							required
+							pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"
+							placeholder="dd.mm.yyyy"
+						/>
+						<span class="validity"></span>
+					</div>
+				</div>
+				<div class="input-payments-container">
+					<p class="input-date-title">
+						Input the date of payment (in ascending order) and the amount paid:
+					</p>
+					<div class="input-payments-wrapper">
+						<input
+							id="input-payment-date"
+							type="text"
+							required
+							pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"
+							placeholder="dd.mm.yyyy"
+						/>
+						<input
+							type="number"
+							id="input-payment-amount"
+							placeholder="amount paid"
+							inputmode="decimal"
+							min="0.00"
+							step="0.01"
+						/>
+					</div>
+					<button class="add-payment-button" type="button">Add</button>
+				</div>
+				<div class="table-wrapper">
+					<h3 class="table-title">Payments:</h3>
+					<table class="payments-table" style="border: 1px">
+						<thead class="payments-thead">
+							<tr>
+								<th scope="col">Date of payment</th>
+								<th scope="col">Amount paid</th>
+							</tr>
+						</thead>
+
+						<tbody class="payments-tbody">
+							<tr>
+								<td class="payments-date-payment">01.07.2024</td>
+								<td class="payments-amount">50000</td>
+								<td class="payments-table-buttons">
+									<div class="table-buttons">
+										<button class="table-edit-button" type="button">
+											<svg
+												class="edit-icon"
+												stroke="currentColor"
+												fill="currentColor"
+												stroke-width="0"
+												viewBox="0 0 576 512"
+												height="1em"
+												width="1em"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+												></path>
+											</svg>
+										</button>
+										<button class="table-save-button" type="button">
+											<svg
+												class="save-icon"
+												stroke="currentColor"
+												fill="currentColor"
+												stroke-width="0"
+												viewBox="0 0 448 512"
+												height="1em"
+												width="1em"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"
+												></path>
+											</svg>
+										</button>
+										<button
+											class="table-delete-button"
+											type="button"
+											style="border: 1px"
+											height="1em"
+											width="1em"
+										>
+											<svg
+												class="delete-icon"
+												stroke="currentColor"
+												fill="currentColor"
+												stroke-width="0"
+												viewBox="0 0 448 512"
+												height="1em"
+												width="1em"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+												></path>
+											</svg>
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+						<tfoot class="payments-tfoot show-footer-above">
+							<tr>
+								<th class="payments-total-row" colspan="1">Total</th>
+								<th class="payments-total-amount">0.00</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<div class="table-wrapper">
+					<h3 class="table-title">Actual credit debt:</h3>
+					<table class="debt-table" style="border: 1px">
+						<thead class="debt-thead">
+							<tr>
+								<th scope="col">Date</th>
+								<th scope="col">Days</th>
+								<th scope="col">Days<br />in the<br />month</th>
+								<th scope="col">Type of<br />operation</th>
+								<th scope="col">Credit<br />balance</th>
+								<th scope="col">Credit<br />obligation<br />/payment</th>
+								<th scope="col">
+									Credit<br />obligation<br />not<br />paid on time
+								</th>
+								<th scope="col">Interest<br />obligation<br />/payment</th>
+								<th scope="col">Commission<br />obligation<br />/payment</th>
+								<th scope="col">Penalty<br />calculation<br />/payment</th>
+								<th scope="col">Advance<br />payment</th>
+								<th scope="col">Amount paid</th>
+								<th scope="col">Total debts</th>
+							</tr>
+						</thead>
+
+						<tbody class="debt-tbody">
+							<tr class="debt-tbody-tr">
+								<td class="debt-date">01.07.2024</td>
+								<td class="debt-days">0</td>
+								<td class="debt-days-month">30</td>
+								<td class="debt-type-operation">obligation</td>
+								<td class="debt-credit-balance">50000</td>
+								<td class="debt-credit">1000.00</td>
+								<td class="debt-credit-not-paid">1000.00</td>
+								<td class="debt-interest">600.00</td>
+								<td class="debt-commission">100</td>
+								<td class="debt-penalty">1916.94</td>
+								<td class="debt-advance-payment">0</td>
+								<td class="debt-amount-paid">800</td>
+								<td class="debt-debts"></td>
+							</tr>
+						</tbody>
+
+						<tfoot class="debt-tfoot show-footer-above">
+							<tr>
+								<th class="debt-total-row" colspan="4">Total</th>
+								<th class="debt-total-credit-balance">0.00</th>
+								<th class="debt-total-credit">0.00</th>
+								<th class="debt-total-credit-not-paid"></th>
+								<th class="debt-total-interest">0.00</th>
+								<th class="debt-total-commission">0.00</th>
+								<th class="debt-total-penalty">0.00</th>
+								<th class="debt-total-advance-payment">0.00</th>
+								<th class="debt-total-amount-paid">0.00</th>
+								<th class="debt-total-debts">0.00</th>
+							</tr>
+							<tr>
+								<th class="debt-total-accrued-row" colspan="4">
+									including: accrued
+								</th>
+								<th class="debt-total-accrued-credit-balance"></th>
+								<th class="debt-total-accrued-credit">0.00</th>
+								<th class="debt-total-accrued-credit-not-paid"></th>
+								<th class="debt-total-accrued-interest">0.00</th>
+								<th class="debt-total-accrued-commission">0.00</th>
+								<th class="debt-total-accrued-penalty">0.00</th>
+								<th class="debt-total-accrued-advance-payment"></th>
+								<th class="debt-total-accrued-amount-paid"></th>
+								<th class="debt-total-accrued-debts"></th>
+							</tr>
+							<tr>
+								<th class="debt-total-paid-row" colspan="4">paid</th>
+								<th class="debt-total-paid-credit-balance"></th>
+								<th class="debt-total-paid-credit">0.00</th>
+								<th class="debt-total-paid-credit-not-paid"></th>
+								<th class="debt-total-paid-interest">0.00</th>
+								<th class="debt-total-paid-commission">0.00</th>
+								<th class="debt-total-paid-penalty">0.00</th>
+								<th class="debt-total-paid-advance-payment"></th>
+								<th class="debt-total-paid-amount-paid"></th>
+								<th class="debt-total-paid-debts"></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</main>
+		<!-- Main end -->
+		<!-- Footer start -->
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-wrapper">
+					<div class="footer-development">
+						<p>© MinITBox, 2024</p>
+						<p>
+							Developer (using open internet resources):
+							<a href="mailto:alex.minghi@gmail.com">Alex Minghi</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- Footer end -->
+
+		<!-- <script type="text/javascript" src="./js/header-scroll.js"></script> -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="./js/header-scroll.js"></script>
+		<script type="text/javascript" src="./js/burger-handler.js"></script>
+		<script type="text/javascript" src="./js/credit-debt.js"></script>
+	</body>
+</html>

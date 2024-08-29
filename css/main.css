@@ -1,0 +1,421 @@
+/* Reset and base styles  */
+@import url('./reset.css');
+@import url('./fonts-Roboto.css');
+@import url('./range-slider.css');
+
+/* *=================================================== */
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	line-height: 1.5;
+	font-weight: 400;
+	color: #001f3f;
+	/* background-color: #001f3f; */
+}
+.container {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding-inline: 15px;
+}
+header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: #001f3f;
+	transition: 0.2s linear;
+	z-index: 999;
+}
+.header--scroll {
+	background-color: #0e1d28;
+}
+
+.header-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding-top: 15px;
+}
+.header-logo-image {
+	width: 100%;
+	max-width: 300px;
+	margin-right: 15px;
+	margin-left: -5px;
+	margin-bottom: 15px;
+}
+.header-menu__list {
+	display: flex;
+	flex-wrap: wrap;
+}
+.header-menu__item:not(:last-child) {
+	margin-right: 40px;
+}
+.header-menu__link {
+	font-size: 28px;
+	line-height: 1.33;
+	color: #fff;
+	opacity: 0.5;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.header-menu__link:hover,
+.header-menu__link:focus,
+.header-menu__link:active {
+	color: #fff;
+	opacity: 1;
+}
+.is-current {
+	color: #fff;
+	opacity: 1;
+}
+/* *start header__burger ======================= */
+.header__burger {
+	display: none;
+	width: 40px;
+	height: 28px;
+	position: relative;
+}
+.burger__line {
+	display: block;
+	width: 100%;
+	height: 2px;
+	background-color: #fff;
+	position: absolute;
+	left: 0;
+}
+.burger__line-first {
+	top: 0;
+}
+.burger__line-second {
+	top: 50%;
+	transform: translateY(-50%);
+}
+.burger__line-third {
+	bottom: 0;
+}
+/* *end header__burger =========================== */
+.main {
+	margin-top: 170px;
+	margin-bottom: 50px;
+}
+h1 {
+	font-size: 30px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-bottom: 20px;
+	color: #002e63;
+}
+.range-slider-container {
+	margin-bottom: 15px;
+}
+.range-slider-wrapper {
+	border-bottom: 1px solid gray;
+}
+.range-slider-wrapper:not(:last-child) {
+	margin-bottom: 15px;
+}
+#range-dailyPenaltyRate {
+	--c: #002e63; /* active color */
+}
+.input-number-container {
+	margin-bottom: 20px;
+}
+.input-number-wrapper {
+	max-width: 400px;
+	display: flex;
+	/* flex-wrap: wrap; */
+	justify-content: flex-end;
+	border-bottom: 1px solid gray;
+
+	position: relative;
+}
+.input-number-wrapper:not(:last-child) {
+	margin-bottom: 15px;
+}
+.input-number-title {
+	margin-right: auto;
+}
+input[type='number'] {
+	width: 150px;
+	border-top: 1px solid grey;
+	border-inline: 1px solid grey;
+	text-align: right;
+	margin-right: 35px;
+}
+.cu {
+	position: absolute;
+	top: 50%;
+	translate: 0 -50%;
+}
+
+.input-date-container {
+	margin-bottom: 20px;
+}
+
+.input-date-wrapper {
+	max-width: 400px;
+	display: flex;
+	/* flex-wrap: wrap; */
+	justify-content: flex-end;
+	align-content: center;
+	border-bottom: 1px solid gray;
+
+	position: relative;
+}
+
+.input-date-title {
+	margin-right: auto;
+}
+#input-date-credit-issue,
+#input-date-actual-debt {
+	width: 150px;
+	border-top: 1px solid grey;
+	border-inline: 1px solid grey;
+	text-align: right;
+	padding-right: 15px;
+	margin-right: 35px;
+	/* position: relative; */
+}
+input[type='text']:valid + span::after {
+	content: '✓';
+	color: green;
+
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	translate: 0 -50%;
+}
+input[type='text']:invalid + span::after {
+	content: '✖';
+	color: red;
+
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	translate: 0 -50%;
+}
+input::placeholder {
+	color: #001f3f;
+	opacity: 0.7;
+}
+
+.credit-analysis {
+	max-width: fit-content;
+	padding: 20px;
+
+	background-color: #f5f5f5;
+	box-shadow: 0 0 4px 2px grey inset;
+	border-radius: 6px;
+	overflow: hidden;
+
+	font-weight: 500;
+	color: #65000b;
+
+	margin-bottom: 20px;
+}
+
+.input-payments-container {
+	max-width: 400px;
+	background-color: #f5f5f5;
+
+	padding: 5px;
+	box-shadow: 0 0 4px 2px grey inset;
+	border-radius: 6px;
+	overflow: hidden;
+}
+.input-payments-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	gap: 10px;
+}
+#input-payment-date {
+	width: 150px;
+	border: 1px solid grey;
+	background-color: #fff;
+
+	text-align: center;
+	margin: 5px;
+}
+#input-payment-amount {
+	width: 150px;
+	border: 1px solid grey;
+	background-color: #fff;
+
+	text-align: right;
+	margin: 5px;
+}
+.add-payment-button {
+	display: block;
+
+	border-radius: 5px;
+	padding-inline: 5px;
+	box-shadow: 0 0 2px 2px grey;
+	margin: 5px auto;
+	transition: all 0.2s ease;
+}
+.add-payment-button:hover {
+	background-color: #fff;
+}
+.add-payment-button:active {
+	transform: translate(1px, 2px);
+}
+
+#edit-payment-date {
+	max-width: 100px;
+	border: 1px solid grey;
+	background-color: #fff;
+
+	text-align: center;
+	margin: 0px;
+}
+#edit-payment-amount {
+	max-width: 100px;
+	border: 1px solid grey;
+	background-color: #fff;
+
+	text-align: right;
+	margin: 0px;
+}
+
+.table-title {
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+table {
+	border-spacing: 0; /* Removes the cell spacing via CSS */
+	border-collapse: collapse;
+
+	font-size: 16px;
+
+	margin-bottom: 20px;
+}
+
+.schedule-tbody tr:nth-child(even) {
+	background-color: #f5f5f5;
+}
+
+.payments-table tr td:nth-child(1),
+.payments-table tr td:nth-child(2) {
+	background-color: #e0ffe0;
+}
+
+/* !	for "Actual Credit Debt" Table,	CSS styles are described in JS file (set by event type) */
+
+th {
+	font-weight: 500;
+	border: 1px solid #000;
+	text-align: right;
+	background-color: #dcdcdc;
+	padding: 0.3em;
+}
+
+td {
+	text-align: right;
+	border: 1px solid #000;
+	padding: 0.3em;
+}
+
+tfoot {
+	color: #65000b;
+}
+.show-footer-above {
+	display: table-row-group;
+}
+
+.schedule-total-row,
+.payments-total-row {
+	text-align: center;
+}
+table tr td:nth-child(1),
+.schedule-table tr td:nth-child(2) {
+	text-align: center; /**style for 1st table column*/
+}
+
+.table-save-button {
+	display: none;
+}
+
+.footer-development {
+	font-size: 12px;
+	margin-bottom: 20px;
+}
+
+/** Media 1080px ================================*/
+
+@media screen and (max-width: 1080px) {
+	body {
+		font-size: clamp(16px, 1.82vw, 20px); /**(20px/1100px)*100=1.82vw */
+	}
+	/* .header-menu__link {
+		font-size: clamp(20px, 3.29vw, 28px);
+	} */
+
+	h1 {
+		font-size: clamp(20px, 2.72vw, 30px); /**(30px/1100px)*100=2.72vw */
+	}
+	table {
+		font-size: clamp(12px, 1.45vw, 16px); /**(16px/1100px)*100=1.45vw */
+	}
+}
+/** Media 767px ================================*/
+@media screen and (max-width: 767px) {
+	.header__burger {
+		display: block;
+	}
+	.header-wrapper {
+		padding-top: 28px;
+	}
+	.header-menu {
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		background-color: #001f3f;
+		z-index: 10;
+		padding: 75px;
+		transform: translateX(100%);
+		transition: all 0.2s linear;
+	}
+	.header-menu--active {
+		transform: translateX(0);
+	}
+	.header-menu__item {
+		width: 100%;
+	}
+	.header-menu__item:not(:last-child) {
+		margin-right: 0;
+		margin-bottom: 30px;
+	}
+	.header-menu__link {
+		font-size: 28px;
+		line-height: 1.33;
+		color: #fff;
+		text-decoration: none;
+	}
+	.header-menu__close {
+		width: 40px;
+		height: 40px;
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		z-index: 11;
+	}
+	.header-menu__close-line {
+		display: block;
+		width: 100%;
+		height: 2px;
+		background-color: #fff;
+		position: absolute;
+		top: 50%;
+	}
+	.header-menu__close-line:first-child {
+		transform: translateY(-50%) rotate(45deg);
+	}
+	.header-menu__close-line:last-child {
+		transform: translateY(-50%) rotate(-45deg);
+	}
+}

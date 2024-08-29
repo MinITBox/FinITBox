@@ -1,0 +1,217 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+/* Reset and base styles  */
+@import url('./reset.css');
+@import url('./fonts-Roboto.css');
+@import url('./range-slider.css');
+
+/* *=================================================== */
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+	line-height: 1.5;
+	font-weight: 400;
+	color: #001f3f;
+	/* background-color: #001f3f; */
+}
+.container {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding-inline: 15px;
+}
+header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: #001f3f;
+	-webkit-transition: 0.2s linear;
+	-o-transition: 0.2s linear;
+	transition: 0.2s linear;
+	z-index: 999;
+}
+.header--active {
+	background-color: #0e1d28;
+}
+
+.header-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	padding-top: 15px;
+}
+.header-logo-image {
+	width: 100%;
+	max-width: 300px;
+	margin-right: 15px;
+	margin-left: -5px;
+	margin-bottom: 15px;
+}
+.header-menu-list {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+.header-menu-item:not(:last-child) {
+	margin-right: 40px;
+}
+.header-menu-link {
+	font-size: 28px;
+	line-height: 1.33;
+	color: #fff;
+	opacity: 0.5;
+	text-decoration: none;
+}
+.header-menu-link:hover,
+.header-menu-link:focus,
+.header-menu-link:active {
+	color: #fff;
+	opacity: 1;
+}
+
+.main {
+	margin-top: 170px;
+	margin-bottom: 50px;
+}
+h1 {
+	font-size: 30px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	margin-bottom: 20px;
+	color: #002e63;
+}
+.range-slider-container {
+	margin-bottom: 15px;
+}
+.range-slider-wrapper {
+	border-bottom: 1px solid gray;
+}
+.range-slider-wrapper:not(:last-child) {
+	margin-bottom: 15px;
+}
+.input-number-container {
+	margin-bottom: 20px;
+}
+.input-number-wrapper {
+	max-width: 400px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	/* flex-wrap: wrap; */
+	-webkit-box-pack: end;
+	-ms-flex-pack: end;
+	justify-content: flex-end;
+	border-bottom: 1px solid gray;
+
+	position: relative;
+}
+.input-number-wrapper:not(:last-child) {
+	margin-bottom: 15px;
+}
+.input-number-title {
+	margin-right: auto;
+}
+input[type='number'] {
+	width: 150px;
+	border-top: 1px solid grey;
+	border-inline: 1px solid grey;
+	text-align: right;
+	margin-right: 35px;
+}
+
+.cu {
+	position: absolute;
+	top: 50%;
+	translate: 0 -50%;
+}
+
+.credit-analysis {
+	max-width: -webkit-fit-content;
+	max-width: -moz-fit-content;
+	max-width: fit-content;
+	padding: 20px;
+
+	background-color: #f5f5f5;
+	-webkit-box-shadow: 0 0 4px 2px grey inset;
+	box-shadow: 0 0 4px 2px grey inset;
+	border-radius: 6px;
+	overflow: hidden;
+
+	font-weight: 500;
+	color: #65000b;
+
+	margin-bottom: 20px;
+}
+
+.table-title {
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+table {
+	border-spacing: 0; /* Removes the cell spacing via CSS */
+	border-collapse: collapse;
+
+	margin-bottom: 20px;
+}
+tbody tr:nth-child(even) {
+	background-color: #f5f5f5;
+}
+th {
+	font-weight: 500;
+	border: 1px solid #000;
+	text-align: right;
+	background-color: #dcdcdc;
+	padding: 0.3em;
+}
+
+td {
+	text-align: right;
+	border: 1px solid #000;
+	padding: 0.3em;
+}
+.show-footer-above {
+	display: table-row-group;
+	color: #65000b;
+}
+.total-row {
+	text-align: center;
+}
+table tr td:nth-child(1) {
+	text-align: center; /**style for 1st table column*/
+}
+.footer-development {
+	font-size: 12px;
+	margin-bottom: 20px;
+}
+
+/** Media start ================================*/
+
+@media screen and (max-width: 850px) {
+	body {
+		font-size: clamp(16px, 2.35vw, 20px);
+	}
+	.header-menu {
+		display: none;
+	}
+	h1 {
+		font-size: clamp(20px, 3.59vw, 30px);
+	}
+	table {
+		font-size: clamp(14px, 2.35vw, 20px);
+	}
+}
+/** Media end ================================*/
